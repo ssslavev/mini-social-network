@@ -1,3 +1,1 @@
 # mini-social-network
-
-test
