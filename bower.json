@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "description": "",
+  "main": "script.js",
+  "authors": "",
+  "license": "mit",
+  "homepage": "",
+  "dependencies": {
+    "crypto-js": "^3.1.9"
+  }
+}

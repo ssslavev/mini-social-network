@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="https://mir-s3-cdn-cf.behance.net/project_modules/disp/05dc9522024427.5630b5e4f1081.png">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" href="#/">Mini-Social-Network</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/">HOME</a></li>
+                    <li><a href="#/about">ABOUT</a></li>
+                    <li><a href="#/ads">ADS</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                    <li id="register"><a href="#/register">REGISTER</a></li>
+                    <li id="login"><a href="#/login">LOGIN</a></li>
+                    <li id="logout"><a href="">LOGOUT</a></li>
+                    <li id="loged">
+                        <a href=""></a>
+                    </li>
+
+                    <li>
+                        <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+                    </li>
+                </ul>
+                <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" />
+                        </div>
+                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="main" class="container">
+
+    </div>
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/sammy/lib/sammy.js"></script>
+    <script src="./node_modules/handlebars/dist/handlebars.js"></script>
+    <script src="./bower_components/crypto-js/crypto-js.js"></script>
+    <script src="./js/json-requester.js"></script>
+    <script src="./js/templates.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/spiner.js"></script>
+    <script src="./controllers/usersController.js"></script>
+    <script src="./js/app.js"></script>
+
+
+
+</body>
+
+</html>
