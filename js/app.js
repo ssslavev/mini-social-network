@@ -10,10 +10,7 @@
         });
 
 
-        this.get('#/', () => {
-            document.title = 'Home'
-            templates.get('home').then((tmp) => $main.html(tmp))
-        });
+        this.get('#/', homeController.all);
 
         this.get('#/about', () => {
             document.title = 'About'
@@ -47,7 +44,6 @@
 
     $(() => {
         sammyApp.run('#/')
-
 
         var target = $('#main');
         $(document).ajaxStart(function() {
