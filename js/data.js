@@ -59,6 +59,20 @@ data = (function() {
         return username;
     }
 
+    function getUserById(id) {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        let url = `https://baas.kinvey.com/user/kid_BJmTNavCl/${id}`;
+
+        return jsonRequester.get(url, { headers: headers })
+        l
+    }
+
     function createPost(post) {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
 
@@ -89,17 +103,32 @@ data = (function() {
 
     }
 
+    function getPostsByUserId(id) {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={"_acl.creator":"${id}"}`;
+
+        return jsonRequester.get(url, { headers: headers })
+    }
+
     return {
         users: {
             login,
             register,
             logout,
-            getCurrentuser
+            getCurrentuser,
+            getUserById
 
         },
         posts: {
             createPost,
-            getAllPosts
+            getAllPosts,
+            getPostsByUserId
         }
     }
 })();

@@ -41,8 +41,29 @@ let usersController = (function() {
         })
     }
 
+    function getById(context) {
+        let user;
+        let posts;
+        let id = context.params['id'];
+
+        Promise.all([data.users.getUserById(id), data.posts.getPostsByUserId(id)])
+            .then(([reqUser, reqPosts]) => {
+                user = reqUser;
+                posts = reqPosts;
+                console.log(user);
+                console.log(posts);
+
+                return templates.get('user-details')
+            })
+            .then((tmpl) => {
+
+                context.$element().html(tmpl({ user, posts }))
+            })
+    }
+
     return {
         register,
-        login
+        login,
+        getById
     }
 })();

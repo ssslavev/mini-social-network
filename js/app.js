@@ -5,9 +5,7 @@
     var sammyApp = Sammy('#main', function() {
         var $main = $('#main');
 
-        this.get('#/user/:id', () => {
-            $main.html('User profile page');
-        });
+        this.get('#/user/:id', usersController.getById);
 
 
         this.get('#/', homeController.all);
