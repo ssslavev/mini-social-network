@@ -35,7 +35,11 @@ data = (function() {
 
         let reqUser = {
             username: user.username,
-            password: CryptoJS.SHA1(user.password).toString()
+            password: CryptoJS.SHA1(user.password).toString(),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            gender: user.gender
         }
 
         var url = 'https://baas.kinvey.com/user/kid_BJmTNavCl'
@@ -46,7 +50,7 @@ data = (function() {
 
     function logout() {
         localStorage.clear();
-        location = '#/';
+        document.location = '#/';
 
     }
 

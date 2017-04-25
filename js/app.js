@@ -57,6 +57,7 @@
             $('#loged a').html(data.users.getCurrentuser()).attr('href', '#/user/' + localStorage.getItem('signed-in-user-id'));
 
         } else {
+            location = '#/login'
             $('#logout').addClass('hidden');
         }
 
