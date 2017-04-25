@@ -43,6 +43,8 @@
     $(() => {
         sammyApp.run('#/')
 
+
+
         var target = $('#main');
         $(document).ajaxStart(function() {
             var spinner = new Spinner().spin()

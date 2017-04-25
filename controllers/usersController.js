@@ -58,12 +58,15 @@ let usersController = (function() {
     function getById(context) {
         let user;
         let posts;
+        let url;
         let id = context.params['id'];
 
-        Promise.all([data.users.getUserById(id), data.posts.getPostsByUserId(id)])
-            .then(([reqUser, reqPosts]) => {
+        Promise.all([data.users.getUserById(id), data.posts.getPostsByUserId(id), data.posts.getPicture()])
+            .then(([reqUser, reqPosts, reqPicture]) => {
                 user = reqUser;
                 posts = reqPosts;
+                url = reqPicture[0]._downloadURL;
+                console.log(url);
                 console.log(user);
                 console.log(posts);
 
@@ -76,13 +79,40 @@ let usersController = (function() {
             })
             .then((tmpl) => {
 
-                context.$element().html(tmpl({ user, posts }))
+                context.$element().html(tmpl({ user, posts, url }))
+
+                $("#input-1").fileinput();
+
+
 
                 $(".btn-pref .btn").click(function() {
                     $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-                    // $(".tab").addClass("active"); // instead of this do the below 
                     $(this).removeClass("btn-default").addClass("btn-primary");
                 });
+
+                $('#avatar').on('click', () => {
+                    $('#myModal').modal('show');
+                })
+
+                $('.fileinput-upload').on('click', () => {
+                    let file = $('#input-1')[0].files[0];
+
+
+                    let metadata = {
+                        "_filename": file.name,
+                        "size": file.size,
+                        "mimeType": file.type,
+                        "picture-type": "avatar",
+                        "_public": true
+                    }
+
+                    data.posts.pictureUpload(metadata, file)
+                        .then((picture) => {
+                            location.reload(true)
+
+                        })
+                })
+
             })
     }
 

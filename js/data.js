@@ -120,6 +120,66 @@ data = (function() {
         return jsonRequester.get(url, { headers: headers })
     }
 
+    function pictureUpload(data, file) {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`,
+            "Content-type": 'application/json',
+            "X-Kinvey-Content-Type": data.mimeType
+        }
+
+        let url = `https://baas.kinvey.com/blob/kid_BJmTNavCl/`;
+
+        let promise = new Promise((resolve, reject) => {
+            $.ajax({
+                    method: 'POST',
+                    url: url,
+                    headers: headers,
+                    data: JSON.stringify(data),
+                })
+                .then((success) => {
+
+                    let innerHeaders = success._requiredHeaders;
+                    innerHeaders['Content-Type'] = file.type
+                    let uploadUrl = success._uploadURL;
+                    let id = success._id;
+
+                    $.ajax({
+                            method: 'PUT',
+                            url: uploadUrl,
+                            headers: innerHeaders,
+                            processData: false,
+                            data: file
+
+                        })
+                        .then((success) => {
+                            resolve(success);
+                        })
+                        .catch((error) => {
+                            reject(error);
+                        })
+                })
+        })
+
+        return promise;
+
+    }
+
+    function getPicture() {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let id = localStorage.getItem('signed-in-user-id')
+        let url = `https://baas.kinvey.com/blob/kid_BJmTNavCl?query={"_acl.creator":"${id}"}`;
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        return jsonRequester.get(url, { headers: headers })
+
+    }
+
     return {
         users: {
             login,
@@ -132,7 +192,9 @@ data = (function() {
         posts: {
             createPost,
             getAllPosts,
-            getPostsByUserId
+            getPostsByUserId,
+            pictureUpload,
+            getPicture
         }
     }
 })();
