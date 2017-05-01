@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" media="all" href="./bower_components/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="./bower_components/jquery-ui/themes/base/jquery-ui.css">
     <title>Document</title>
 </head>
 
@@ -45,7 +46,7 @@
                 <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" />
+                            <input id="search-input" type="text" class="form-control" placeholder="Search" />
                         </div>
                         <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </form>
@@ -61,6 +62,7 @@
     </div>
 
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
     <script src="./node_modules/sammy/lib/sammy.js"></script>
@@ -70,8 +72,10 @@
     <script src="./js/templates.js"></script>
     <script src="./js/data.js"></script>
     <script src="./js/spiner.js"></script>
+    <script src="./js/searching.js"></script>
     <script src="./controllers/usersController.js"></script>
     <script src="./controllers/homeController.js"></script>
+
     <script src="./js/app.js"></script>
 
 
@@ -81,6 +85,31 @@
             appKey: 'kid_BJmTNavCl',
             appSecret: '99514622ec804161ae373ff280a18439'
         })
+
+        var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+        ];
     </script>
 </body>
 

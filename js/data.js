@@ -167,6 +167,24 @@ data = (function() {
 
     }
 
+    function getAllUsers() {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = 'https://baas.kinvey.com/user/kid_BJmTNavCl'
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+        return jsonRequester.get(url, { headers: headers })
+    }
+
+    function getFriends() {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = ' https://baas.kinvey.com/appdata/kid_BJmTNavCl/friends'
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+        return jsonRequester.get(url, { headers: headers })
+    }
+
     function getPicture() {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
         let id = localStorage.getItem('signed-in-user-id')
@@ -186,7 +204,9 @@ data = (function() {
             register,
             logout,
             getCurrentuser,
-            getUserById
+            getUserById,
+            getAllUsers,
+            getFriends
 
         },
         posts: {

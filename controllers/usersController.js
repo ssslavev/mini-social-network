@@ -59,16 +59,25 @@ let usersController = (function() {
         let user;
         let posts;
         let url;
+        let friends;
         let id = context.params['id'];
 
-        Promise.all([data.users.getUserById(id), data.posts.getPostsByUserId(id), data.posts.getPicture()])
-            .then(([reqUser, reqPosts, reqPicture]) => {
+        Promise.all([data.users.getUserById(id),
+                data.posts.getPostsByUserId(id),
+                data.posts.getPicture(),
+                data.users.getFriends()
+            ])
+            .then(([reqUser, reqPosts, reqPicture, reqFriends]) => {
                 user = reqUser;
                 posts = reqPosts;
+                friends = reqFriends;
                 url = reqPicture[0]._downloadURL;
                 console.log(url);
                 console.log(user);
                 console.log(posts);
+
+
+
 
                 if (id === localStorage.getItem('signed-in-user-id')) {
                     return templates.get('current-user-page')
@@ -80,6 +89,16 @@ let usersController = (function() {
             .then((tmpl) => {
 
                 context.$element().html(tmpl({ user, posts, url }))
+
+
+                //check if friends
+                var result = friends.filter(function(obj) {
+                    return (obj.user_one === localStorage.getItem('signed-in-user-id') && obj.user_two === id) ||
+                        (obj.user_one === id && obj.user_two === localStorage.getItem('signed-in-user-id'));
+                });
+                if (result.length === 1) {
+                    $('#req-btn').attr('value', 'You are friends')
+                }
 
                 $("#input-1").fileinput();
 
@@ -112,6 +131,9 @@ let usersController = (function() {
 
                         })
                 })
+
+
+
 
             })
     }

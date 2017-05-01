@@ -51,6 +51,11 @@
             target.html(spinner.el)
         });
 
+        $(document).ajaxStop(function() {
+            $(".spinner").remove();
+
+        });
+
 
 
         if (data.users.getCurrentuser()) {
