@@ -100,7 +100,7 @@ data = (function() {
             "authorization": `Kinvey ${authToken}`
         }
 
-        let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts';
+        let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={}&sort={"_kmd.ect":-1}';
 
         return jsonRequester.get(url, { headers: headers })
         l
