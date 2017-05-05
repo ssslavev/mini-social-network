@@ -18,12 +18,13 @@ data = (function() {
         }
 
         var url = 'https://baas.kinvey.com/user/kid_BJmTNavCl/login'
+
         return jsonRequester.post(url, { data: reqUser, headers: headers })
             .then((user) => {
                 localStorage.setItem(USERNAME_STORAGE_KEY, user.username);
                 localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, user._kmd.authtoken);
                 localStorage.setItem(USER_ID, user._id)
-                document.location.reload(true);
+
 
             })
     }
@@ -74,7 +75,7 @@ data = (function() {
         let url = `https://baas.kinvey.com/user/kid_BJmTNavCl/${id}`;
 
         return jsonRequester.get(url, { headers: headers })
-        l
+
     }
 
     function createPost(post) {
@@ -88,7 +89,7 @@ data = (function() {
         let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts';
 
         return jsonRequester.post(url, { data: post, headers: headers })
-        l
+
 
     }
 
@@ -103,7 +104,7 @@ data = (function() {
         let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={}&sort={"_kmd.ect":-1}';
 
         return jsonRequester.get(url, { headers: headers })
-        l
+
 
     }
 

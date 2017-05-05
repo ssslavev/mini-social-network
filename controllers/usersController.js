@@ -26,7 +26,9 @@ let usersController = (function() {
                 data.users.register(user)
                     .then((user) => {
                         console.log(user);
-                        document.location.reload(true);
+                        window.setTimeout(function() { location.reload() }, 1500)
+
+                        toastr.success("You are registered! Please, login.")
                     })
 
             })
@@ -48,7 +50,17 @@ let usersController = (function() {
 
                 }
 
-                data.users.login(user);
+                data.users.login(user)
+                    .then(() => {
+                        toastr.success("You are logged in!")
+                        window.setTimeout(function() { location.reload() }, 1500)
+
+
+
+
+
+
+                    });
 
 
             })

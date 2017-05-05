@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="https://mir-s3-cdn-cf.behance.net/project_modules/disp/05dc9522024427.5630b5e4f1081.png">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./bower_components/toastr/toastr.min.css">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" media="all" href="./bower_components/bootstrap-fileinput/css/fileinput.min.css">
     <link rel="stylesheet" href="./bower_components/jquery-ui/themes/base/jquery-ui.css">
@@ -29,15 +30,13 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#/">HOME</a></li>
-                    <li><a href="#/about">ABOUT</a></li>
-                    <li><a href="#/ads">ADS</a></li>
-                    <li><a href="#">CONTACT</a></li>
                     <li id="register"><a href="#/register">REGISTER</a></li>
                     <li id="login"><a href="#/login">LOGIN</a></li>
-                    <li id="logout"><a href="">LOGOUT</a></li>
                     <li id="loged">
                         <a href=""></a>
                     </li>
+                    <li id="logout"><a href="">LOGOUT</a></li>
+
 
                     <li>
                         <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
@@ -62,6 +61,7 @@
     </div>
 
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/toastr/toastr.min.js"></script>
     <script src="./bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
@@ -85,31 +85,6 @@
             appKey: 'kid_BJmTNavCl',
             appSecret: '99514622ec804161ae373ff280a18439'
         })
-
-        var availableTags = [
-            "ActionScript",
-            "AppleScript",
-            "Asp",
-            "BASIC",
-            "C",
-            "C++",
-            "Clojure",
-            "COBOL",
-            "ColdFusion",
-            "Erlang",
-            "Fortran",
-            "Groovy",
-            "Haskell",
-            "Java",
-            "JavaScript",
-            "Lisp",
-            "Perl",
-            "PHP",
-            "Python",
-            "Ruby",
-            "Scala",
-            "Scheme"
-        ];
     </script>
 </body>
 

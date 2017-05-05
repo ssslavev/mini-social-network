@@ -1,6 +1,11 @@
 let homeController = (function() {
 
     function all(context) {
+
+        if (!localStorage.getItem('signed-in-user-username')) {
+            context.redirect('#/login')
+        }
+
         let posts;
 
         data.posts.getAllPosts()
@@ -23,7 +28,8 @@ let homeController = (function() {
                     data.posts.createPost(post)
                         .then((post) => {
                             console.log(post);
-                            document.location.reload(true);
+                            window.setTimeout(function() { location.reload() }, 1500)
+                            toastr.success('Post was created!')
                         })
 
                 })
