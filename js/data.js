@@ -51,7 +51,8 @@ data = (function() {
 
     function logout() {
         localStorage.clear();
-        document.location = '#/';
+        document.location.reload(true)
+            // document.location = '#/login';
 
     }
 
@@ -186,6 +187,89 @@ data = (function() {
         return jsonRequester.get(url, { headers: headers })
     }
 
+    function acceptRequest(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = ' https://baas.kinvey.com/appdata/kid_BJmTNavCl/friends'
+        let data = {
+            user_one: id,
+            user_two: currId
+
+        }
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+        return jsonRequester.post(url, { headers: headers, data: data })
+    }
+
+    function getFromReq(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/friendReq?query={"from":"${id}", "to":"${currId}"}`
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        return jsonRequester.get(url, { headers: headers })
+    }
+
+    function getToReq(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/friendReq?query={"from":"${currId}", "to":"${id}"}`
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        return jsonRequester.get(url, { headers: headers })
+    }
+
+    function sendFriendReq(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/friendReq`
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        let data = {
+            from: currId,
+            to: id
+
+        }
+
+        return jsonRequester.post(url, { headers: headers, data: data })
+    }
+
+
+
+    function cancelRequest(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/friendReq?query={"from":"${currId}", "to":"${id}"}`
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+
+
+        return jsonRequester.del(url, { headers: headers })
+    }
+
+    function deleteRequest(id) {
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/friendReq?query={"from":"${id}", "to":"${currId}"}`
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+
+
+        return jsonRequester.del(url, { headers: headers })
+    }
+
     function getPicture() {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
         let id = localStorage.getItem('signed-in-user-id')
@@ -207,7 +291,13 @@ data = (function() {
             getCurrentuser,
             getUserById,
             getAllUsers,
-            getFriends
+            getFriends,
+            getFromReq,
+            getToReq,
+            sendFriendReq,
+            cancelRequest,
+            deleteRequest,
+            acceptRequest
 
         },
         posts: {

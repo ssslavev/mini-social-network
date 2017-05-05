@@ -68,6 +68,8 @@ let usersController = (function() {
     }
 
     function getById(context) {
+        let fromQuery;
+        let toQuery;
         let user;
         let posts;
         let url;
@@ -77,16 +79,21 @@ let usersController = (function() {
         Promise.all([data.users.getUserById(id),
                 data.posts.getPostsByUserId(id),
                 data.posts.getPicture(),
-                data.users.getFriends()
+                data.users.getFriends(), data.users.getFromReq(id),
+                data.users.getToReq(id)
             ])
-            .then(([reqUser, reqPosts, reqPicture, reqFriends]) => {
+            .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq]) => {
                 user = reqUser;
                 posts = reqPosts;
                 friends = reqFriends;
-                url = reqPicture[0]._downloadURL;
+                fromQuery = fromReq;
+                toQuery = toReq;
+                //url = reqPicture[0]._downloadURL;
                 console.log(url);
                 console.log(user);
                 console.log(posts);
+                console.log(fromQuery);
+                console.log(toQuery);
 
 
 
@@ -110,12 +117,64 @@ let usersController = (function() {
                 });
                 if (result.length === 1) {
                     $('#req-btn').attr('value', 'You are friends')
+                    $('#accept-btn').hide()
+                    $('#ignore-btn').hide()
+                    $('#cancel-btn').hide()
+                    $('#remove-btn').show()
+
+                } else if (fromQuery.length === 1) {
+                    $('#accept-btn').show()
+                    $('#ignore-btn').show()
+                    $('#req-btn').hide()
+                    $('#cancel-btn').hide()
+                    $('#remove-btn').hide()
+
+                    $('#accept-btn').on('click', () => {
+                        Promise.all([data.users.deleteRequest(), data.users.acceptRequest(id)])
+                            .then(() => {
+                                toastr.success('You are now friends!')
+                                window.setTimeout(function() { location.reload() }, 500)
+                            })
+
+                    })
+
+
+
+
+                } else if (toQuery.length === 1) {
+                    $('#req-btn').attr('value', 'You are friends').hide()
+                    $('#accept-btn').hide()
+                    $('#ignore-btn').hide()
+                    $('#cancel-btn').show()
+                    $('#remove-btn').hide()
+
+                    $('#cancel-btn').on('click', () => {
+                        data.users.cancelRequest(id)
+                            .then(() => {
+                                toastr.success('Request was canceled!')
+                                window.setTimeout(function() { location.reload() }, 500)
+
+                            })
+                    })
+
+                } else {
+                    $('#req-btn').attr('value', 'Send friend request')
+                    $('#accept-btn').hide()
+                    $('#ignore-btn').hide()
+                    $('#cancel-btn').hide()
+                    $('#remove-btn').hide()
+
+                    $('#req-btn').on('click', () => {
+                        data.users.sendFriendReq(id)
+                            .then(() => {
+                                toastr.success('Friend request was send!')
+                                window.setTimeout(function() { location.reload() }, 500)
+                            })
+                    })
                 }
 
+
                 $("#input-1").fileinput();
-
-
-
                 $(".btn-pref .btn").click(function() {
                     $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
                     $(this).removeClass("btn-default").addClass("btn-primary");

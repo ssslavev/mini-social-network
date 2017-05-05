@@ -71,6 +71,8 @@
 
         $('#logout').on('click', () => {
             data.users.logout();
+
+
         })
 
     })

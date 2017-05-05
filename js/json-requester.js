@@ -36,15 +36,15 @@ var jsonRequester = (function() {
         return send('PUT', url, options);
     }
 
-    // function del(url, options) {
-    //     return send('POST', url, options);
-    // }
+    function del(url, options) {
+        return send('DELETE', url, options);
+    }
 
     return {
         send,
         get,
         post,
-        put
-        // delete: del
+        put,
+        del
     };
 }());
