@@ -1,12 +1,9 @@
 (function() {
 
-
-
     var sammyApp = Sammy('#main', function() {
         var $main = $('#main');
 
         this.get('#/user/:id', usersController.getById);
-
 
         this.get('#/', homeController.all);
 
@@ -14,16 +11,12 @@
             document.title = 'About'
             templates.get('about').then((tmp) => {
                 $main.html(tmp)
-
             })
-
         });
 
         this.get('#/register', usersController.register)
 
         this.get('#/login', usersController.login);
-
-
 
         this.get('#/ads', () => {
             var test;
@@ -34,16 +27,11 @@
                     return templates.get('ads');
                 })
                 .then((tmpl) => $main.html(tmpl(test)));
-
-
         });
     })
 
-
     $(() => {
         sammyApp.run('#/')
-
-
 
         var target = $('#main');
         $(document).ajaxStart(function() {
@@ -56,8 +44,6 @@
 
         });
 
-
-
         if (data.users.getCurrentuser()) {
             $('#register').addClass('hidden');
             $('#login').addClass('hidden');
@@ -68,15 +54,9 @@
             $('#logout').addClass('hidden');
         }
 
-
         $('#logout').on('click', () => {
             data.users.logout();
-
-
         })
-
     })
-
-
-
+    
 })();
