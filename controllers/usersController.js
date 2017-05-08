@@ -116,7 +116,7 @@ let usersController = (function() {
                     $('#remove-btn').hide()
 
                     $('#accept-btn').on('click', () => {
-                        Promise.all([data.users.deleteRequest(), data.users.acceptRequest(id)])
+                        Promise.all([data.users.deleteRequest(), data.users.acceptRequest(id), data.users.addFriend(id)])
                             .then(() => {
                                 toastr.success('You are now friends!')
                                 window.setTimeout(function() { location.reload() }, 500)
