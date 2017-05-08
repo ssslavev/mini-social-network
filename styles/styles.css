@@ -15,6 +15,10 @@ Code snippet by maridlcrmn for Bootsnipp.com
 Follow me on Twitter @maridlcrmn
 */
 
+body {
+    padding-top: 70px;
+}
+
 .navbar {
     font-weight: bold
 }
@@ -29,6 +33,7 @@ Follow me on Twitter @maridlcrmn
     z-index: 2;
     padding: 4px 20px;
     margin: 10px auto;
+    margin-right: 20px;
     transition: transform 0.3s;
 }
 
