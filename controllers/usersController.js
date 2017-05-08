@@ -20,8 +20,6 @@ let usersController = (function() {
                     lastName: $('#register-last-name').val(),
                     email: $('#register-email').val(),
                     gender: gender
-
-
                 }
                 data.users.register(user)
                     .then((user) => {
@@ -30,7 +28,6 @@ let usersController = (function() {
 
                         toastr.success("You are registered! Please, login.")
                     })
-
             })
         });
     }
@@ -54,15 +51,7 @@ let usersController = (function() {
                     .then(() => {
                         toastr.success("You are logged in!")
                         window.setTimeout(function() { location.reload() }, 1500)
-
-
-
-
-
-
                     });
-
-
             })
         })
     }
@@ -94,9 +83,6 @@ let usersController = (function() {
                 console.log(posts);
                 console.log(fromQuery);
                 console.log(toQuery);
-
-
-
 
                 if (id === localStorage.getItem('signed-in-user-id')) {
                     return templates.get('current-user-page')
@@ -138,9 +124,6 @@ let usersController = (function() {
 
                     })
 
-
-
-
                 } else if (toQuery.length === 1) {
                     $('#req-btn').attr('value', 'You are friends').hide()
                     $('#accept-btn').hide()
@@ -173,7 +156,6 @@ let usersController = (function() {
                     })
                 }
 
-
                 $("#input-1").fileinput();
                 $(".btn-pref .btn").click(function() {
                     $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
@@ -202,10 +184,6 @@ let usersController = (function() {
 
                         })
                 })
-
-
-
-
             })
     }
 
