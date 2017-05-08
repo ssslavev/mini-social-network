@@ -77,6 +77,12 @@ let usersController = (function() {
                 friends = reqFriends;
                 fromQuery = fromReq;
                 toQuery = toReq;
+                if (reqPicture[0]) {
+                    url = reqPicture[0]._downloadURL
+                } else {
+                    url = '../images/user_1.jpg'
+                }
+
                 //url = reqPicture[0]._downloadURL;
                 console.log(url);
                 console.log(user);
@@ -116,8 +122,9 @@ let usersController = (function() {
                     $('#remove-btn').hide()
 
                     $('#accept-btn').on('click', () => {
-                        Promise.all([data.users.deleteRequest(), data.users.acceptRequest(id)])
+                        Promise.all([data.users.deleteRequest(id), data.users.acceptRequest(id)])
                             .then(() => {
+
                                 toastr.success('You are now friends!')
                                 window.setTimeout(function() { location.reload() }, 500)
                             })

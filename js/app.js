@@ -14,20 +14,13 @@
             })
         });
 
+
+
         this.get('#/register', usersController.register)
 
         this.get('#/login', usersController.login);
 
-        this.get('#/ads', () => {
-            var test;
-            document.title = 'Ads'
-            $.get('https://forum-telerik.firebaseio.com/test.json')
-                .then((res) => {
-                    test = res;
-                    return templates.get('ads');
-                })
-                .then((tmpl) => $main.html(tmpl(test)));
-        });
+        this.get('#/requests', requestsController.all)
     })
 
     $(() => {
@@ -58,5 +51,5 @@
             data.users.logout();
         })
     })
-    
+
 })();
