@@ -4,9 +4,6 @@ data = (function() {
         AUTH_TOKEN_STORAGE_KEY = 'signed-in-user-authtoken',
         USER_ID = 'signed-in-user-id';
 
-
-
-
     function login(user) {
         let headers = {
             "authorization": "Basic a2lkX0JKbVROYXZDbDo5OTUxNDYyMmVjODA0MTYxYWUzNzNmZjI4MGExODQzOQ=="
@@ -24,8 +21,6 @@ data = (function() {
                 localStorage.setItem(USERNAME_STORAGE_KEY, user.username);
                 localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, user._kmd.authtoken);
                 localStorage.setItem(USER_ID, user._id)
-
-
             })
     }
 
@@ -52,8 +47,7 @@ data = (function() {
     function logout() {
         localStorage.clear();
         document.location.reload(true)
-            // document.location = '#/login';
-
+        // document.location = '#/login';
     }
 
     function getCurrentuser() {
@@ -63,11 +57,11 @@ data = (function() {
         }
 
         return username;
+
     }
 
     function getUserById(id) {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-
 
         let headers = {
             "authorization": `Kinvey ${authToken}`
@@ -82,7 +76,6 @@ data = (function() {
     function createPost(post) {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
 
-
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
@@ -91,12 +84,10 @@ data = (function() {
 
         return jsonRequester.post(url, { data: post, headers: headers })
 
-
     }
 
     function getAllPosts() {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-
 
         let headers = {
             "authorization": `Kinvey ${authToken}`
@@ -106,12 +97,10 @@ data = (function() {
 
         return jsonRequester.get(url, { headers: headers })
 
-
     }
 
     function getPostsByUserId(id) {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-
 
         let headers = {
             "authorization": `Kinvey ${authToken}`
@@ -120,11 +109,11 @@ data = (function() {
         let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={"_acl.creator":"${id}"}`;
 
         return jsonRequester.get(url, { headers: headers })
+
     }
 
     function pictureUpload(data, file) {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-
 
         let headers = {
             "authorization": `Kinvey ${authToken}`,
@@ -154,7 +143,6 @@ data = (function() {
                             headers: innerHeaders,
                             processData: false,
                             data: file
-
                         })
                         .then((success) => {
                             resolve(success);
@@ -194,7 +182,6 @@ data = (function() {
         let data = {
             user_one: id,
             user_two: currId
-
         }
 
         let headers = {
@@ -210,7 +197,6 @@ data = (function() {
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
-
         return jsonRequester.get(url, { headers: headers })
     }
 
@@ -221,7 +207,6 @@ data = (function() {
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
-
         return jsonRequester.get(url, { headers: headers })
     }
 
@@ -236,13 +221,10 @@ data = (function() {
         let data = {
             from: currId,
             to: id
-
         }
 
         return jsonRequester.post(url, { headers: headers, data: data })
     }
-
-
 
     function cancelRequest(id) {
         let currId = localStorage.getItem('signed-in-user-id')
@@ -251,9 +233,6 @@ data = (function() {
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
-
-
-
         return jsonRequester.del(url, { headers: headers })
     }
 
@@ -264,9 +243,6 @@ data = (function() {
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
-
-
-
         return jsonRequester.del(url, { headers: headers })
     }
 
@@ -278,9 +254,7 @@ data = (function() {
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }
-
         return jsonRequester.get(url, { headers: headers })
-
     }
 
     return {
@@ -298,7 +272,6 @@ data = (function() {
             cancelRequest,
             deleteRequest,
             acceptRequest
-
         },
         posts: {
             createPost,
