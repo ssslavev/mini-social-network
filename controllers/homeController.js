@@ -23,6 +23,7 @@ let homeController = (function() {
                     let post = {
                         content: $('#status_message').val(),
                         author: localStorage.getItem('signed-in-user-username'),
+                        comments: []
                     }
 
                     data.posts.createPost(post)
@@ -32,6 +33,26 @@ let homeController = (function() {
                             toastr.success('Post was created!')
                         })
 
+                })
+
+                $('.btn-comment').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    let id = $(this).parents('#post-container').attr('data-id')
+                    let text = $(this).parents('.input-group').children('.comment-input').val()
+
+                    let comment = {
+                        text: text,
+                        username: localStorage.getItem('')
+                    }
+
+                    data.posts.addComment(id, comment)
+                        .then((res) => {
+                            console.log(res)
+                            window.setTimeout(function() { location.reload() }, 1500)
+                            toastr.success('Comment was added!')
+                        })
                 })
             })
     }

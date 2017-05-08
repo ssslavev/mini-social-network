@@ -38,7 +38,7 @@
 
     
 {{#each this}}
-<div class="container" id="post-container">
+<div class="container" id="post-container" data-id="{{_id}}">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-white post panel-shadow">
             <div class="post-heading">
@@ -66,24 +66,26 @@
             </div>
             <div class="post-footer">
                 <div class="input-group"> 
-                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <input class="form-control comment-input"  placeholder="Add a comment" type="text">
                     <span class="input-group-addon">
-                        <a href="#"><i class="fa fa-edit"></i></a>  
+                        <a href="#" class="btn-comment"><i class="fa fa-edit"></i></a>  
                     </span>
                 </div>
                 <ul class="comments-list">
+                    {{#each comments}}
                     <li class="comment">
                         <a class="pull-left" href="#">
                             <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
                         </a>
                         <div class="comment-body">
                             <div class="comment-heading">
-                                <h4 class="user">Gavino Free</h4>
-                                <h5 class="time">5 minutes ago</h5>
+                            <a href="#/user/{{authorId}}"><h4 class="user">{{user}}</h4></a>
+                                <h5 class="time">{{date}}</h5>
                             </div>
-                            <p>Test message</p>
+                            <p><strong>{{text}}</strong></p>
                         </div>
                     </li>
+                    {{/each}}
                 </ul>
             </div>
         </div>

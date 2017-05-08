@@ -47,7 +47,7 @@ data = (function() {
     function logout() {
         localStorage.clear();
         document.location.reload(true)
-        // document.location = '#/login';
+            // document.location = '#/login';
     }
 
     function getCurrentuser() {
@@ -109,6 +109,67 @@ data = (function() {
         let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={"_acl.creator":"${id}"}`;
 
         return jsonRequester.get(url, { headers: headers })
+
+    }
+
+    function getPostsById(id) {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts?query={"_id":"${id}"}`;
+
+        return jsonRequester.get(url, { headers: headers })
+
+    }
+
+    function addComment(id, comment) {
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+
+        let post;
+
+        return getPostsById(id).then(function(res) {
+                post = res
+                console.log(post)
+                console.log(post[0].author)
+
+                return post
+            })
+            .then((post) => {
+                let data = {
+                    "_id": post[0]._id,
+                    "content": post[0].content,
+                    "author": post[0].author,
+                    "_acl": {
+                        "creator": post[0]._acl.creator
+                    },
+                    "comments": post[0].comments,
+                    "_kmd": {
+                        "lmt": post[0]._kmd.lmt,
+                        "ect": post[0]._kmd.ect
+                    }
+                }
+
+                data.comments.push({
+                    text: comment.text,
+                    user: localStorage.getItem('signed-in-user-username'),
+                    date: new Date(),
+                    authorId: localStorage.getItem('signed-in-user-id')
+
+                })
+
+                let url = `https://baas.kinvey.com/appdata/kid_BJmTNavCl/posts/${id}`;
+
+                return jsonRequester.put(url, { data: data, headers: headers })
+            })
+
+
 
     }
 
@@ -278,7 +339,9 @@ data = (function() {
             getAllPosts,
             getPostsByUserId,
             pictureUpload,
-            getPicture
+            getPicture,
+            addComment,
+            getPostsById
         }
     }
 })();
