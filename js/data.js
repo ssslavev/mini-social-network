@@ -251,18 +251,20 @@ data = (function() {
         return jsonRequester.post(url, { headers: headers, data: data })
     }
 
-    function addFriend(id){
-        let currId = localStorage.getItem('signed-in-user-id')
+    function addFriend(){
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-        let url = ' https://baas.kinvey.com/user/kid_BJmTNavCl'
-        let data = {
-            Friends: id
-        }
 
         let headers = {
-            "authorization": `Kinvey ${authToken}`
+            "authorization": `Kinvey ${authToken}`,
         }
-        return jsonRequester.post(url, { headers: headers, data: data })
+        let id = localStorage.getItem('signed-in-user-id');
+        let url = `https://baas.kinvey.com/user/kid_BJmTNavCl/${id}`;
+        //TODO: Need to read data firstName, lastName, email, gender and Friends
+        let data = {
+            "Friends": []
+        }
+        data.Friends.push('newAdd')
+        return jsonRequester.put(url, {data: data, headers: headers})
     }
 
     function getFromReq(id) {
@@ -361,7 +363,8 @@ data = (function() {
             cancelRequest,
             deleteRequest,
             acceptRequest,
-            getAllRequests
+            getAllRequests,
+            addFriend
         },
         posts: {
             createPost,
