@@ -251,6 +251,20 @@ data = (function() {
         return jsonRequester.post(url, { headers: headers, data: data })
     }
 
+    function addFriend(id){
+        let currId = localStorage.getItem('signed-in-user-id')
+        let authToken = localStorage.getItem('signed-in-user-authtoken')
+        let url = ' https://baas.kinvey.com/user/kid_BJmTNavCl'
+        let data = {
+            Friends: id
+        }
+
+        let headers = {
+            "authorization": `Kinvey ${authToken}`
+        }
+        return jsonRequester.post(url, { headers: headers, data: data })
+    }
+
     function getFromReq(id) {
         let currId = localStorage.getItem('signed-in-user-id')
         let authToken = localStorage.getItem('signed-in-user-authtoken')
