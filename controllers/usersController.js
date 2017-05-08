@@ -21,6 +21,13 @@ let usersController = (function() {
                     email: $('#register-email').val(),
                     gender: gender
                 }
+
+                Validate.userNameValidation(user.username);
+                Validate.nameValidation(user.firstName);
+                Validate.nameValidation(user.lastName);
+                Validate.emailValidation(user.email);
+                Validate.passwordValidation(user.password);
+
                 data.users.register(user)
                     .then((user) => {
                         console.log(user);
