@@ -15,37 +15,47 @@ class Validate{
 
     static userNameValidation(input){
         if (input === ''){
-            throw ('Username is empty!');
+            toastr.warning('Username is empty!');
+            throw('Username is empty!');
         } else if (input.length < MIN_USER_LENTGH || input.length > MAX_USER_LENGTH){
-            throw ('Username must be between 3 and 9 charatcetrs length!');
+            toastr.warning('Username must be between 3 and 9 charatcetrs length!');
+            throw('Username must be between 3 and 9 charatcetrs length!');
         } else if (!input.match(USER_CHARS)){
-            throw ("Username must consist of only letter and or numbers!");
+            toastr.warning("Username must consist of only letter and or numbers!");
+            throw("Username must consist of only letter and or numbers!");
         }
     }
 
     static nameValidation(input){
         if (input === ''){
-            throw ('Name is empty!');
+            toastr.warning('Name is empty!');
+            throw('Name is empty!');
         } else if (input.length < MIN_NAME_LENGTH || input.length > MAX_NAME_LENGTH){
-            throw ('Name must be between 2 and 20 charatcetrs length!');
+            toastr.warning('Name must be between 2 and 20 charatcetrs length!');
+            throw('Name must be between 2 and 20 charatcetrs length!');
         } else if (!input.match(NAME_CHARS)){
-            throw ("Name must consist of only letters!");
+            toastr.warning("Name must consist of only letters!");
+            throw("Name must consist of only letters!");
         }
     }
 
     static passwordValidation(input){
         if (input === ''){
-            throw ('Password is empty!');
+            toastr.warning('Password is empty!');
+            throw('Password is empty!');
         } else if (input.length < MIN_PASSWORD_LENGTH || input.length >MAX_PASSWORD_LENGTH){
-            throw ('Password must be between 6 and 20 charatcetrs length!');
+            toastr.warning('Password must be between 6 and 20 charatcetrs length!');
+            throw('Password must be between 6 and 20 charatcetrs length!');
         }
     }
 
     static emailValidation(input){
         if (input === ''){
-            throw ('Email is required!');
+            toastr.warning('Email is required!');
+            throw('Email is required!');
         } else if (!input.match(EMAIL_REGEX)){
-            throw ('Not a valid email!');
+            toastr.warning('Not a valid email!');
+            throw('Not a valid email!');
         }
     }
 }
