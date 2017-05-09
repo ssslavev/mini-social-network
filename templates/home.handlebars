@@ -34,11 +34,12 @@
 		</form>
 	</div>
 	</div>
-	</div> 
+	</div>
+	
 
     
 {{#each this}}
-<div class="container" id="post-container" data-id="{{_id}}">
+<div class="container post-container" id="" data-id="{{_id}}">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-white post panel-shadow">
             <div class="post-heading">
@@ -50,7 +51,7 @@
                         <a href="#/user/{{_acl.creator}}"><b>{{author}}</b></a>
                         made a post.
                     </div>
-                    <h6 class="text-muted time">1 minute ago</h6>
+                    <h6 class="text-muted time">{{_kmd.ect}}</h6>
                 </div>
             </div> 
             <div class="post-description"> 

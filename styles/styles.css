@@ -430,8 +430,13 @@ body {
     margin-left: 50px;
 }
 
-#post-container {
+.post-container {
     margin-top: 25px;
+    display: block
+}
+
+.fb-page {
+    display: inline
 }
 
 .card {

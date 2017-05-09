@@ -30,7 +30,7 @@ let usersController = (function() {
 
                 data.users.register(user)
                     .then((user) => {
-                        console.log(user);
+                        // console.log(user);
                         window.setTimeout(function() { location.reload() }, 1500)
 
                         toastr.success("You are registered! Please, login.")
@@ -71,17 +71,20 @@ let usersController = (function() {
         let url;
         let friends;
         let id = context.params['id'];
+        let frn;
 
         Promise.all([data.users.getUserById(id),
                 data.posts.getPostsByUserId(id),
                 data.posts.getPicture(),
                 data.users.getFriends(), data.users.getFromReq(id),
-                data.users.getToReq(id)
+                data.users.getToReq(id),
+                data.users.getAllFriends()
             ])
-            .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq]) => {
+            .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq, friendReq]) => {
                 user = reqUser;
                 posts = reqPosts;
                 friends = reqFriends;
+
                 fromQuery = fromReq;
                 toQuery = toReq;
                 if (reqPicture[0]) {
@@ -89,13 +92,14 @@ let usersController = (function() {
                 } else {
                     url = '../images/user_1.jpg'
                 }
-
+                //console.log(friendReq)
                 //url = reqPicture[0]._downloadURL;
-                console.log(url);
-                console.log(user);
-                console.log(posts);
-                console.log(fromQuery);
-                console.log(toQuery);
+                // console.log(url);
+                // console.log(user);
+                // console.log(posts);
+                // console.log(fromQuery);
+                // console.log(toQuery);
+                // console.log(friends + 'friends')
 
                 if (id === localStorage.getItem('signed-in-user-id')) {
                     return templates.get('current-user-page')
@@ -106,14 +110,23 @@ let usersController = (function() {
             })
             .then((tmpl) => {
 
-                context.$element().html(tmpl({ user, posts, url }))
+                let friendRes = friends.filter(function(obj) {
+                    return obj.user_one._id === localStorage.getItem('signed-in-user-id') || obj.user_two._id === localStorage.getItem('signed-in-user-id')
+                })
+
+                context.$element().html(tmpl({ user, posts, url, friendRes }))
 
 
                 //check if friends
                 var result = friends.filter(function(obj) {
-                    return (obj.user_one === localStorage.getItem('signed-in-user-id') && obj.user_two === id) ||
-                        (obj.user_one === id && obj.user_two === localStorage.getItem('signed-in-user-id'));
+                    return (obj.user_one._id === localStorage.getItem('signed-in-user-id') && obj.user_two._id === id) ||
+                        (obj.user_one._id === id && obj.user_two._id === localStorage.getItem('signed-in-user-id'));
                 });
+
+
+
+                //console.log(friendRes)
+
                 if (result.length === 1) {
                     $('#req-btn').attr('value', 'You are friends')
                     $('#accept-btn').hide()

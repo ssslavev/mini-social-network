@@ -25,7 +25,7 @@
             <!-- http://lorempixel.com/850/280/people/9/ -->
         </div>
         <div class="useravatar">
-            <a id="avatar" href="#"  ><img alt="" src="{{url}}"></a>
+            <a id="avatar" href="#"><img alt="" src="{{url}}"></a>
         </div>
         <div class="card-info"> <span class="card-title">{{user.firstName}} {{user.lastName}}</span>
 
@@ -122,7 +122,9 @@
                 <h3>{{user.gender}}</h3>
             </div>
             <div class="tab-pane fade in" id="tab3">
-                <h3>This is tab 3</h3>
+                {{#each friendRes}}
+                <h3>{{user_one._id}}</h3>
+                {{/each}}
             </div>
             <div class="tab-pane fade in" id="tab4">
                 <h3>This is tab 4</h3>

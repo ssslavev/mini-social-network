@@ -11,7 +11,8 @@ let homeController = (function() {
         data.posts.getAllPosts()
             .then((resPosts) => {
                 posts = resPosts;
-                console.log(posts)
+                // console.log(posts)
+
 
                 return templates.get('home')
             })
@@ -28,7 +29,7 @@ let homeController = (function() {
 
                     data.posts.createPost(post)
                         .then((post) => {
-                            console.log(post);
+                            // console.log(post);
                             window.setTimeout(function() { location.reload() }, 1500)
                             toastr.success('Post was created!')
                         })
@@ -39,7 +40,7 @@ let homeController = (function() {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    let id = $(this).parents('#post-container').attr('data-id')
+                    let id = $(this).parents('.post-container').attr('data-id')
                     let text = $(this).parents('.input-group').children('.comment-input').val()
 
                     let comment = {
@@ -49,7 +50,7 @@ let homeController = (function() {
 
                     data.posts.addComment(id, comment)
                         .then((res) => {
-                            console.log(res)
+                            //console.log(res)
                             window.setTimeout(function() { location.reload() }, 1500)
                             toastr.success('Comment was added!')
                         })
