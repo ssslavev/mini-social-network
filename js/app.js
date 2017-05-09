@@ -13,9 +13,7 @@
                 $main.html(tmp)
             })
         });
-
-
-
+        
         this.get('#/register', usersController.register)
 
         this.get('#/login', usersController.login);
