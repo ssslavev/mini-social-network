@@ -50,7 +50,6 @@ let usersController = (function() {
                 let user = {
                     username: $('#login-username').val(),
                     password: $('#login-password').val(),
-
                 }
 
                 data.users.login(user)

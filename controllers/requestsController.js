@@ -7,13 +7,11 @@ let requestsController = (function() {
             .then((req) => {
                 usersArray = req
 
-                //console.log(usersArray)
                 return templates.get('requests')
             })
             .then((tmpl) => {
 
                 context.$element().html((tmpl(usersArray)))
-                    //console.log(usersArray)
             })
     }
 
