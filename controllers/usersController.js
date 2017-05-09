@@ -78,9 +78,9 @@ let usersController = (function() {
                 data.posts.getPicture(),
                 data.users.getFriends(), data.users.getFromReq(id),
                 data.users.getToReq(id),
-                data.users.getAllFriends()
+                //data.users.getAllFriends()
             ])
-            .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq, friendReq]) => {
+            .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq]) => {
                 user = reqUser;
                 posts = reqPosts;
                 friends = reqFriends;
@@ -110,19 +110,25 @@ let usersController = (function() {
             })
             .then((tmpl) => {
 
-                let friendRes = friends.filter(function(obj) {
-                    return obj.user_one._id === localStorage.getItem('signed-in-user-id') || obj.user_two._id === localStorage.getItem('signed-in-user-id')
-                })
+                context.$element().html(tmpl({ user, posts, url }))
+
+                //let friendRes = friends.filter(function(obj) {
+                //    return obj.user_one._id === localStorage.getItem('signed-in-user-id') || obj.user_two._id === localStorage.getItem('signed-in-user-id')
+                //})
 
                 context.$element().html(tmpl({ user, posts, url, friendRes }))
 
 
-                //check if friends
-                var result = friends.filter(function(obj) {
-                    return (obj.user_one._id === localStorage.getItem('signed-in-user-id') && obj.user_two._id === id) ||
-                        (obj.user_one._id === id && obj.user_two._id === localStorage.getItem('signed-in-user-id'));
-                });
+                ////check if friends
+                //var result = friends.filter(function(obj) {
+                //    return (obj.user_one._id === localStorage.getItem('signed-in-user-id') && obj.user_two._id === id) ||
+                //        (obj.user_one._id === id && obj.user_two._id === localStorage.getItem('signed-in-user-id'));
+                //});
 
+                var result = friends.filter(function(obj) {
+                    return (obj.user_one === localStorage.getItem('signed-in-user-id') && obj.user_two === id) ||
+                        (obj.user_one === id && obj.user_two === localStorage.getItem('signed-in-user-id'));
+                });
 
 
                 //console.log(friendRes)
