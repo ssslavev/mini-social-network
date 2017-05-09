@@ -30,7 +30,6 @@ let usersController = (function() {
 
                 data.users.register(user)
                     .then((user) => {
-                        // console.log(user);
                         window.setTimeout(function() { location.reload() }, 1500)
 
                         toastr.success("You are registered! Please, login.")
@@ -77,29 +76,20 @@ let usersController = (function() {
                 data.posts.getPostsByUserId(id),
                 data.posts.getPicture(),
                 data.users.getFriends(), data.users.getFromReq(id),
-                data.users.getToReq(id),
-                //data.users.getAllFriends()
+                data.users.getToReq(id)
             ])
             .then(([reqUser, reqPosts, reqPicture, reqFriends, fromReq, toReq]) => {
                 user = reqUser;
                 posts = reqPosts;
                 friends = reqFriends;
-
                 fromQuery = fromReq;
                 toQuery = toReq;
+
                 if (reqPicture[0]) {
                     url = reqPicture[0]._downloadURL
                 } else {
                     url = '../images/user_1.jpg'
                 }
-                //console.log(friendReq)
-                //url = reqPicture[0]._downloadURL;
-                // console.log(url);
-                // console.log(user);
-                // console.log(posts);
-                // console.log(fromQuery);
-                // console.log(toQuery);
-                // console.log(friends + 'friends')
 
                 if (id === localStorage.getItem('signed-in-user-id')) {
                     return templates.get('current-user-page')
@@ -112,26 +102,10 @@ let usersController = (function() {
 
                 context.$element().html(tmpl({ user, posts, url }))
 
-                //let friendRes = friends.filter(function(obj) {
-                //    return obj.user_one._id === localStorage.getItem('signed-in-user-id') || obj.user_two._id === localStorage.getItem('signed-in-user-id')
-                //})
-
-                context.$element().html(tmpl({ user, posts, url, friendRes }))
-
-
-                ////check if friends
-                //var result = friends.filter(function(obj) {
-                //    return (obj.user_one._id === localStorage.getItem('signed-in-user-id') && obj.user_two._id === id) ||
-                //        (obj.user_one._id === id && obj.user_two._id === localStorage.getItem('signed-in-user-id'));
-                //});
-
                 var result = friends.filter(function(obj) {
                     return (obj.user_one === localStorage.getItem('signed-in-user-id') && obj.user_two === id) ||
                         (obj.user_one === id && obj.user_two === localStorage.getItem('signed-in-user-id'));
                 });
-
-
-                //console.log(friendRes)
 
                 if (result.length === 1) {
                     $('#req-btn').attr('value', 'You are friends')
@@ -154,7 +128,6 @@ let usersController = (function() {
                                 toastr.success('You are now friends!')
                                 window.setTimeout(function() { location.reload() }, 500)
                             })
-
                     })
 
                 } else if (toQuery.length === 1) {
@@ -169,7 +142,6 @@ let usersController = (function() {
                             .then(() => {
                                 toastr.success('Request was canceled!')
                                 window.setTimeout(function() { location.reload() }, 500)
-
                             })
                     })
 
@@ -179,7 +151,6 @@ let usersController = (function() {
                     $('#ignore-btn').hide()
                     $('#cancel-btn').hide()
                     $('#remove-btn').hide()
-
                     $('#req-btn').on('click', () => {
                         data.users.sendFriendReq(id)
                             .then(() => {
@@ -201,8 +172,6 @@ let usersController = (function() {
 
                 $('.fileinput-upload').on('click', () => {
                     let file = $('#input-1')[0].files[0];
-
-
                     let metadata = {
                         "_filename": file.name,
                         "size": file.size,
@@ -214,7 +183,6 @@ let usersController = (function() {
                     data.posts.pictureUpload(metadata, file)
                         .then((picture) => {
                             location.reload(true)
-
                         })
                 })
             })
