@@ -4,6 +4,7 @@
     "description": "",
     "main": "script.js",
     "scripts": {
+        "postinstall": "node ./node_modules/bower/bin/bower install",
         "start": "harp server --port $PORT",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -13,8 +14,8 @@
         "bootstrap": "^3.3.7",
         "bower": "^1.8.0",
         "handlebars": "^4.0.6",
+        "harp": "*",
         "jquery": "^3.2.1",
-        "sammy": "^0.7.6",
-        "harp": "*"
+        "sammy": "^0.7.6"
     }
 }
