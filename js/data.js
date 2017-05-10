@@ -227,7 +227,7 @@ data = (function() {
 
     function getFriends() {
         let authToken = localStorage.getItem('signed-in-user-authtoken')
-        let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/friends?resolve=user&retainReferences=false'
+        let url = 'https://baas.kinvey.com/appdata/kid_BJmTNavCl/friends'
         let headers = {
             "authorization": `Kinvey ${authToken}`
         }

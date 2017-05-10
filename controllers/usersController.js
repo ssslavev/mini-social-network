@@ -102,8 +102,8 @@ let usersController = (function() {
                 context.$element().html(tmpl({ user, posts, url }))
 
                 var result = friends.filter(function(obj) {
-                    return (obj.user_one === localStorage.getItem('signed-in-user-id') && obj.user_two === id) ||
-                        (obj.user_one === id && obj.user_two === localStorage.getItem('signed-in-user-id'));
+                    return (obj.user_one._id === localStorage.getItem('signed-in-user-id') && obj.user_two._id === id) ||
+                        (obj.user_one._id === id && obj.user_two._id === localStorage.getItem('signed-in-user-id'));
                 });
 
                 if (result.length === 1) {
