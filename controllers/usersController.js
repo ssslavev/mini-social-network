@@ -28,13 +28,13 @@ let usersController = (function() {
                 Validate.emailValidation(user.email);
                 Validate.passwordValidation(user.password);
 
-                data.users.register(user)
+                return data.users.register(user)
                     .then((user) => {
                         window.setTimeout(function() { location.reload() }, 1500)
 
                         toastr.success("You are registered! Please, login.")
-                    })
-            })
+                    });
+            });
         });
     }
 

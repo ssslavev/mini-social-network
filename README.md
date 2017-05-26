@@ -12,7 +12,7 @@ Team Guava - online
 -   grafinya.ganche
 
 
-###Project desctiption:###
+###Project desctiption:###3
 
 Mini-Social Network SPA is online social network where you can share your thoughts, get in touch with your friends, and find new ones!
 
